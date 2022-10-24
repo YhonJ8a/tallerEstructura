@@ -11,13 +11,14 @@ public class Main {
         System.out.println("Practica nodos\n ¿Qué desea hacer?\n");
         do{
             System.out.println("\n" +
-                    "1) Insertar nodo\n" +
-                    "2) Eliminar Enésimo\n" +
-                    "3) Imprimir lista de izquerda a derecha\n"+
-                    "4) Imprimir lista de derecha a izquierda\n"+
-                    "5) Sumar primer par con el ultimo par\n"+
-                    "6) Concatenar\n"+
-                    "7) Intercalar\n"+
+                    "1) Insertar dato\n" +
+                    "2) Insertar nodo\n" +
+                    "3) Eliminar Enésimo\n" +
+                    "4) Imprimir lista de izquerda a derecha\n"+
+                    "5) Imprimir lista de derecha a izquierda\n"+
+                    "6) Sumar primer par con el ultimo par\n"+
+                    "7) Concatenar\n"+
+                    "8) Intercalar\n"+
                     "0) salir\n");
             opcion = sc.nextInt();
             switch (opcion){
@@ -33,7 +34,7 @@ public class Main {
                     lista.EliminarEnesimo(2);
                     break;
                 case 4:
-                    lista.imprimirListaIzq_Der();
+                    lista.ImprimirListaIzq_Der();
                     break;
                 case 5:
                     lista.ImprimirListaDer_Izq();
@@ -108,7 +109,7 @@ public class Main {
             tamanoNodo = ultimo;
             while (tamanoNodo!=null) {
                 System.out.println("> "+tamanoNodo.info);
-                tamanoNodo = tamanoNodo.siguiente;
+                tamanoNodo = tamanoNodo.anterior;
             }
         }
 
@@ -141,18 +142,6 @@ public class Main {
             }
         }
 
-        public void imprimirListaIzq_Der(){
-            nodo temporal = new nodo();
-            temporal = primero;
-            if (vacio())
-                System.out.println("La lista está vacía");
-            else{
-                while (temporal != null) {
-                    System.out.println(temporal.info);
-                    temporal = temporal.siguiente;
-                }
-            }
-        }
         public Boolean vacio(){
             return (primero==null);
         }
