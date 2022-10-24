@@ -43,7 +43,11 @@ public class Main {
                     lista.sumarPrimerParUltimoPar();
                     break;
                 case 7:
-
+                    ListaDE lista2 = new ListaDE();
+                    lista2.InsertarNodo(sc.nextInt());
+                    lista2.InsertarNodo(sc.nextInt());
+                    lista2.InsertarNodo(sc.nextInt());
+                    lista.Concatenar(lista2);
                     break;
                 case 0:
                     System.out.println("Gracias por usar el programa");
@@ -63,8 +67,10 @@ public class Main {
         public void InsertarNodo(int valor){
             nodo temporal = new nodo();
             temporal.info = valor;
-            if(vacio())
+            if(vacio()){
                 primero = temporal;
+                ultimo = temporal;
+            }
             else{
                 nodo current = primero;
                 while (current.siguiente != null){
@@ -77,9 +83,10 @@ public class Main {
         }
 
         public void InsertarNodo(nodo temporal){
-            if(vacio())
+            if(vacio()){
                 primero = temporal;
-            else{
+                ultimo = temporal;
+            }else{
                 nodo current = primero;
                 while (current.siguiente != null){
                     current = current.siguiente;
@@ -140,6 +147,12 @@ public class Main {
                 }
                 System.out.println("La suma de primer par y el ultimo par es : " + (primerPar + ultimoPrimo));
             }
+        }
+
+        public void Concatenar(ListaDE lista){
+            nodo lista_1 = ultimo;
+            nodo lista_2 = lista.primero;
+            lista_1.siguiente = lista_2;
         }
 
         public Boolean vacio(){
