@@ -4,13 +4,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Lista lista = new Lista();
+        ListaDE lista = new ListaDE();
         Scanner sc = new Scanner(System.in);
         lista.primero = null;
         int opcion,lugar;
         System.out.println("Practica nodos\n ¿Qué desea hacer?\n");
         do{
-            System.out.println("\n1) Insertar nodo\n" +
+            System.out.println("\n" +
+                    "1) Insertar nodo\n" +
                     "2) Eliminar Enésimo\n" +
                     "3) Imprimir lista de izquerda a derecha\n"+
                     "4) Imprimir lista de derecha a izquierda\n"+
@@ -22,23 +23,26 @@ public class Main {
             switch (opcion){
                 case 1:
                     System.out.println("Valor del nodo");
-                    lista.insertarNodo(sc.nextInt());
-                    lista.insertarNodo(2);
-                    lista.insertarNodo(3);
-                    lista.insertarNodo(4);
+                    lista.InsertarNodo(new nodo().info = sc.nextInt());
                     break;
                 case 2:
+                    System.out.println("Valor del nodo");
+                    lista.InsertarNodo(sc.nextInt());
                     break;
                 case 3:
-                    lista.imprimirListaIzq_Der();
+                    lista.EliminarEnesimo(2);
                     break;
                 case 4:
+                    lista.imprimirListaIzq_Der();
                     break;
                 case 5:
+                    lista.ImprimirListaDer_Izq();
                     break;
                 case 6:
+                    lista.sumarPrimerParUltimoPar();
                     break;
                 case 7:
+
                     break;
                 case 0:
                     System.out.println("Gracias por usar el programa");
@@ -49,9 +53,13 @@ public class Main {
             }
         }while(opcion !=0);
     }
-    public static class Lista{
+    public static class ListaDE {
         nodo primero;
-        public void insertarNodo(int valor){
+        nodo ultimo;
+
+        public ListaDE() {}
+
+        public void InsertarNodo(int valor){
             nodo temporal = new nodo();
             temporal.info = valor;
             if(vacio())
@@ -63,10 +71,56 @@ public class Main {
                 }
                 current.siguiente = temporal;
                 temporal.anterior = current;
-                //primero = current;
-                int i = 0;
+                ultimo = temporal;
             }
         }
+
+        public void InsertarNodo(nodo temporal){
+            if(vacio())
+                primero = temporal;
+            else{
+                nodo current = primero;
+                while (current.siguiente != null){
+                    current = current.siguiente;
+                }
+                current.siguiente = temporal;
+                temporal.anterior = current;
+                ultimo = temporal;
+            }
+        }
+
+        public void EliminarEnesimo(int lugar){
+            nodo tamanoNodo = new nodo();
+            int tamano=1;
+            tamanoNodo = primero;
+            while (tamanoNodo!=null || tamano <= lugar) {
+                if(tamano == lugar){
+                    tamanoNodo.anterior.siguiente = tamanoNodo.siguiente;
+                    tamanoNodo.siguiente.anterior = tamanoNodo.anterior;
+                }
+                tamanoNodo = tamanoNodo.siguiente;
+                tamano++;
+            }
+        }
+
+        public void ImprimirListaDer_Izq(){
+            nodo tamanoNodo = new nodo();
+            tamanoNodo = ultimo;
+            while (tamanoNodo!=null) {
+                System.out.println("> "+tamanoNodo.info);
+                tamanoNodo = tamanoNodo.siguiente;
+            }
+        }
+
+        public void ImprimirListaIzq_Der(){
+            nodo tamanoNodo = new nodo();
+            tamanoNodo = primero;
+            while (tamanoNodo!=null) {
+                System.out.println("> "+tamanoNodo.info);
+                tamanoNodo = tamanoNodo.siguiente;
+            }
+        }
+
         public void sumarPrimerParUltimoPar(){
             int primerPar=0, ban2=0, ultimoPrimo=0;
             nodo temporal = new nodo();
@@ -75,17 +129,18 @@ public class Main {
                 System.out.println("La lista está vacía");
             else {
                 while (temporal != null) {
-                    if (temporal.esPar() && ban2 == 0) {
+                    if (temporal.EsImpar() && ban2 == 0) {
                         primerPar = temporal.info;
                         ban2 = 1;
                     }
-                    if (!temporal.esPar() && ultimoPrimo != temporal.info)
+                    if (!temporal.EsImpar() && ultimoPrimo != temporal.info)
                         ultimoPrimo = temporal.info;
                     temporal = temporal.siguiente;
                 }
                 System.out.println("La suma de primer par y el ultimo par es : " + (primerPar + ultimoPrimo));
             }
         }
+
         public void imprimirListaIzq_Der(){
             nodo temporal = new nodo();
             temporal = primero;
@@ -106,10 +161,15 @@ public class Main {
         int info;
         nodo siguiente;
         nodo anterior;
-        public Boolean esPar(){
-            return (info % 2 == 0);
+
+        public nodo() {
         }
-        public Boolean esPrimo(){
+
+        public Boolean EsImpar(){
+            return !(info % 2 == 0);
+        }
+
+        public Boolean EsPrimo(){
             return (info % 2 == 0 && info % 3 == 0 && info % 5 == 0 && info % 7 ==0 || (info == 1 || info ==2 || info == 3 || info ==5 || info ==7));
         }
     }

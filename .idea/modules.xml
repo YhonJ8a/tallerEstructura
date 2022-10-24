@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Taller_corte2/Taller_corte2.iml" filepath="$PROJECT_DIR$/Taller_corte2/Taller_corte2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/tallerEstructura.iml" filepath="$PROJECT_DIR$/.idea/tallerEstructura.iml" />
+    </modules>
+  </component>
+</project>
